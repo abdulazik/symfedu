@@ -1,4 +1,9 @@
-<div style="width:100%;text-align:Center;">Qr code generater for Symfony</div>
+QR CODES GENERATOR
 ==
+How to install?
 
-"# symfedu" 
+1. Donwload the repository
+
+2. Run it by OpenServer
+
+So, it is done!
