@@ -1,4 +1,4 @@
-qr
+<div style="width:100%;text-align:Center;">Qr code generater for Symfony</div>
 ==
 
-A Symfony project created on February 9, 2018, 7:52 pm.
+"# symfedu" 
