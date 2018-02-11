@@ -37,7 +37,8 @@ class GenController extends Controller
 
 	header('Content-Type: '.$qrCode->getContentType());
 	$resultCode = $qrCode;
-	$qrCode->writeFile('C:\op\OpenServer\domains\localhost\qr\web\images/qrcode.png');
+	$path = $this->get('kernel')->getRootDir() . '/../web/images';
+	$qrCode->writeFile($path.'/qrcode.png'); 
 	$dir = __DIR__;
 
 	$form = $this->createFormBuilder()
