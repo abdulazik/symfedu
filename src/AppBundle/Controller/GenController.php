@@ -39,7 +39,6 @@ class GenController extends Controller
 	$resultCode = $qrCode;
 	$path = $this->get('kernel')->getRootDir() . '/../web/images';
 	$qrCode->writeFile($path.'/qrcode.png'); 
-	$dir = __DIR__;
 
 	$form = $this->createFormBuilder()
             ->add('code', TextType::class)
