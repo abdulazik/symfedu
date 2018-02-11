@@ -47,7 +47,6 @@ class GenController extends Controller
 	
 	return $this->render('default/qr.html.twig', array(
             'form' => $form->createView(),
-			'dir' => $dir,
         ));
     }
 }
