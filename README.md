@@ -2,7 +2,7 @@ QR CODES GENERATOR
 
 How to install?
 
-1. Donwload the repository
+1. Download the repository
 
 2. Run it by OpenServer
 
