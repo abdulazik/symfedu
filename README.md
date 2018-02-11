@@ -1,5 +1,5 @@
 QR CODES GENERATOR
-==
+
 How to install?
 
 1. Donwload the repository
