@@ -1,0 +1,20 @@
+<head>
+
+</head>
+
+<body>
+<style>
+.codePic{
+width:320px;
+height:320px;
+}
+</style>
+	<div class="codePic">
+	<img src="{{ asset('images/qrcode.png') }}"/>
+
+	</div>
+	<form action="http://localhost/qr/web/app_dev.php/gen" method="POST">
+		Code<input type="text" name="code">
+		<input type="submit" value="run">
+	</form>
+</body>
