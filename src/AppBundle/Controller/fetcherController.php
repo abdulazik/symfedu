@@ -26,7 +26,6 @@ class fetcherController extends Controller
     /**
      * @Route("/lastgen")
      */
-	 
     public function multiformAction(Request $request)
     {
 		
@@ -37,7 +36,9 @@ class fetcherController extends Controller
 	$lastPost = new lastGen();
 	$lastOne = $lastPost->lastPost($Qrcode1, $num=0);
 	$lastArray = $Qrcode1[$lastOne-1];
-	print_r($lastArray);
+	//foreach($lastArray as $paramName => $paramValue)
+	//echo $paramName . "<br>";
+	//print_r($lastArray);
 	//print_r($Qrcode321[9]);
 	//$pathToQr = '/qr/web/images/'.$outputHash.'.png';
         

@@ -37,6 +37,8 @@ class Qrcode1
 	 *
 	 *@return qrcodes
      */
+	 
+	public $lastArray;
 public function setDate($date){
 	$this->date = $date;
 	return $this;

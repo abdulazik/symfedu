@@ -1,7 +1,5 @@
 <?php
-
 namespace AppBundle\Controller;
-
 use App\Entity\Task;
 use App\Form\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -80,5 +78,6 @@ class GenController extends Controller
 			'pathToQr' => $pathToQr,
 			'outputHash' => $outputHash,
         ));
+		
     }
 }
