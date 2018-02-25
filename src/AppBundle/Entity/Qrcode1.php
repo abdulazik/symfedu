@@ -29,6 +29,10 @@ class Qrcode1
      * @ORM\Column(name="name", type="text", length=255)
      */
     public $name;
+	/**
+     * @ORM\Column(name="username", type="text", length=20)
+     */
+    public $username;
 	 
 	 /**
      * Set date
@@ -63,6 +67,10 @@ public function setTime($time){
      */
 public function setName($name){
 	$this->name = $name;
+	return $this;
+}
+public function setUsername($username){
+	$this->username = $username;
 	return $this;
 }
 }

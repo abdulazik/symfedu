@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Controller;
+namespace AppBundle\Entity;
 use App\Entity\Task;
 use AppBundle\Form\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\LabelAlignment;
 use Endroid\QrCode\QrCode;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Endroid\QrCode\Response\QrCodeResponse;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -17,26 +16,19 @@ use AppBundle\Entity\Qrcode1;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 
-
-
-class GenController extends Controller
-{
-    /**
-     * @Route("/gen")
-     */
-    public function gen(Request $request)
+class session{
+public function gen(Request $request)
     {
-		
-		$session = new Session();
-		$username = $session->get('username');
 		if(isset($_POST['postname'])){
-			$username = '';
+			$_SESSION['username'] = $_POST['postname'];
+			$username = $_SESSION['username'];
 		}
-		if(isset($username) or !empty($username)){
+		if(isset($_SESSION['username'])){
 		$dateY = date('Y-m-d');
 		$dateH = date('H:i:s');
 		$date = $dateY.$dateH;
 		$picHash = md5($date);
+		$username = $_SESSION['username'];
 		
 	if(!isset($_POST['code'])){
 			$code = 'Aziz';
@@ -66,7 +58,7 @@ class GenController extends Controller
 				$qrcode1->setDate($dateY);
 				$qrcode1->setTime($dateH);
 				$qrcode1->setName($picHash);
-				$qrcode1->setUsername($username);
+				$qrcode1->setUsername($_SESSION['username']);
 				// tells Doctrine you want to (eventually) save the Product (no queries yet)
 				$em->persist($qrcode1);
 
@@ -80,9 +72,9 @@ class GenController extends Controller
 	}
 	
 	$pathToQr = '/qr/web/images/'.$outputHash.'.png';
-	$session->set('pathToQr', $pathToQr);
-	$session->set('outputHash', $outputHash);
-	$authmes = 'Hello '.$username;
+	$_SESSION['pathToQr'] = $pathToQr;
+	$_SESSION['outputHash'] = $outputHash;
+	$authmes = 'Hello '.$_SESSION['username'];
         
 	return $this->render('default/qr.html.twig', array(
 			'pathToQr' => $pathToQr,
@@ -105,5 +97,7 @@ class GenController extends Controller
 				));
 				
 		}
+		
+		return $username;
     }
 }

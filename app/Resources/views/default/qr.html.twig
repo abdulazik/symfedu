@@ -6,14 +6,19 @@
 <style>
 .codePic{
 width:320px;
-height:320px;
+height:380px;
 }
 </style>
 	<div class="codePic">
+	{{ authmes }}
+	<form action="http://localhost/qr/web/app_dev.php/gen" method="POST"> 
+		<input type="submit" name="logout" value="logout">
+	</form>
 	<img src='{{ pathToQr }}'/>
 	</div>
-	<form action="http://localhost/qr/web/app_dev.php/gen" method="POST">
+	<form action="http://localhost/qr/web/app_dev.php/gen" method="POST"> 
 		Code<input type="text" name="code">
+		<input type="hidden" name="postname" value="{{ username }}">
 		<input type="submit" value="run">
 	</form>
 	{{ outputHash }}
