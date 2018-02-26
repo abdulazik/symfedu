@@ -33,9 +33,7 @@ class loginController extends Controller
 			$username = $session->get('username');
 		if(!isset($username) or empty($username)){
 				
-				
 		if(isset($_POST['username']) and isset($_POST['password'])){
-			
 			$username=$_POST['username'];
 			$password=md5($_POST['password']);
 			

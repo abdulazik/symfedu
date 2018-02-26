@@ -29,8 +29,10 @@ class GenController extends Controller
 		
 		$session = new Session();
 		$username = $session->get('username');
-		if(isset($_POST['postname'])){
-			$username = '';
+		if(isset($_POST['logout'])){
+			unset($username);
+			unset($pathToQr);
+			unset($outputHash);
 		}
 		if(isset($username) or !empty($username)){
 		$dateY = date('Y-m-d');
