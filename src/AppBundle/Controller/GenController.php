@@ -24,17 +24,24 @@ class GenController extends Controller
     /**
      * @Route("/gen")
      */
-    public function gen(Request $request)
+    public function gen(Request $request, \Swift_Mailer $mailer)
     {
 		
 		$session = new Session();
 		$username = $session->get('username');
 		if(isset($_POST['logout'])){
-			unset($username);
-			unset($pathToQr);
-			unset($outputHash);
+			$session->invalidate();
 		}
 		if(isset($username) or !empty($username)){
+			$email = $this->getDoctrine()->getManager();
+				$queryMail = $email->createQuery(
+					'SELECT q.email
+					FROM AppBundle:users q
+					WHERE q.username = :username'
+				)->setParameter('username', $username);
+				$productsMail = $queryMail->getResult();
+				$сmail = implode("",$productsMail[0]);
+				$mail = str_replace("email","",$сmail);
 		$dateY = date('Y-m-d');
 		$dateH = date('H:i:s');
 		$date = $dateY.$dateH;
@@ -62,6 +69,7 @@ class GenController extends Controller
 			$qrCode->writeFile($path.'/'.$outputHash.'.png'); 
 			
 			if($code != 'Aziz'){
+				
 				$em = $this->getDoctrine()->getManager();
 
 				$qrcode1 = new Qrcode1();
@@ -74,6 +82,31 @@ class GenController extends Controller
 
 				// actually executes the queries (i.e. the INSERT query)
 				$em->flush();
+				//email sendment
+				$mailmessage = (new \Swift_Message('Hello Email'))
+					->setFrom('shaks.fon@yandex.ru')
+					->setTo($mail)
+					->setBody(
+					$this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                'Email/qrsend.html.twig',
+                array('username' => $username, 'picHash' => $picHash)
+            ),
+            'text/html'
+        )
+        /*
+         * If you also want to include a plaintext version of the message
+        ->addPart(
+            $this->renderView(
+                'Emails/registration.txt.twig',
+                array('name' => $name)
+            ),
+            'text/plain'
+        )
+        */
+    ;
+
+    $mailer->send($mailmessage);
 			}
 			else{
 				
@@ -91,6 +124,7 @@ class GenController extends Controller
 			'outputHash' => $outputHash,
 			'authmes' => $authmes,
 			'username' => $username,
+			'mail' => $mail,
         ));
 	
 		}

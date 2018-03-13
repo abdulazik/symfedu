@@ -30,6 +30,11 @@ class registerController extends Controller
 		
 	if(!isset($_POST['username']) && !isset($_POST['email']) && !isset($_POST['password1']) && !isset($_POST['password2'])){
 			$ermes = '';
+			
+			return $this->render('default/register.html.twig', array(
+				'ermes'=> $ermes,
+		
+			));
 	}
 	else{
 		if(!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password1']) && !empty($_POST['password2'])){
@@ -67,20 +72,31 @@ class registerController extends Controller
 				else{
 					$ermes = 'User with such email already exists';
 				}
+				
+			return $this->render('default/register.html.twig', array(
+				'ermes'=> $ermes,
+		
+			));
 		}
 		else{
 			$ermes = 'Passowords must match!';
 			$username = '';
+			
+			return $this->render('default/register.html.twig', array(
+				'ermes'=> $ermes,
+		
+			));
 		}
 	  }
 	  else{
 		  $ermes = 'Fill all inputs';
+		  
+			return $this->render('default/register.html.twig', array(
+				'ermes'=> $ermes,
+		
+			));
 	  }
 	}
 	
-		return $this->render('default/register.html.twig', array(
-			'ermes'=> $ermes,
-		
-        ));
     }
 }

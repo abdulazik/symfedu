@@ -81,11 +81,19 @@ class myqrController extends Controller
 			$n = count($productsDate)-1;
 			$htmlqr = array();
 			while($n != -1){
+			$okfc= '{"sz":33,"st":"oval","nc":1,"nt":1}';
+			$url1 = $_SERVER['REQUEST_URI'];
+			$url2 = str_replace("/","%2F",$url1);
 			$htmlqrtemp = '<div class="inputqr">
 				<div class="pic"><img src="/qr/web/images/'.$paths[$n].'.png" width="50px"></div>
 				<div class="picname">'.$paths[$n].'</div>
 				<div class="date">'.$dates[$n].'</div>
-			</div>';
+				<div class="date"><script type="text/javascript">document.write(VK.Share.button({url: "http://localhost/qr/web/app_dev.php/", image: "http://localhost/qr/web/images/'.$paths[$n].'.png", title: "Qr-код '.$username.'`a! Попробуй и ты!"}, {type: "custom", text: "<img src=\"https://soskol.com/images/vk.png\" width=\"32\"/>"}));
+</script><a href="https://www.facebook.com/share.php?u=http://localhost/qr/web/app_dev.php/myqr">
+    <img src="https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg" width="32" alt="share icon">
+</a><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Join%20Us!%20'.$username.'%20recomends!" target="_blank"><img src="https://seeklogo.com/images/T/twitter-2012-negative-logo-5C6C1F1521-seeklogo.com.png" width="32"/></a>
+  <a href="https://connect.ok.ru/dk?cmd=WidgetSharePreview&st.cmd=WidgetSharePreview&st.hosterId=47126&st._aid=ExternalShareWidget_SharePreview&st.shareUrl=http%3A%2F%2F'.$url2.'" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Odnoklassniki.svg/1029px-Odnoklassniki.svg.png" width="32"/></a>
+  </div></div>';
 			array_push($htmlqr, $htmlqrtemp);
 			$n--;
 			}
