@@ -65,8 +65,25 @@ class GenController extends Controller
 			$resultCode = $qrCode;
 			$code = $_POST['code'];
 			$outputHash = $picHash;
+
 			$path = $this->get('kernel')->getRootDir() . '/../web/images';
+
 			$qrCode->writeFile($path.'/'.$outputHash.'.png'); 
+
+			// Загрузка штампа и фото, для которого применяется водяной знак (называется штамп или печать)
+			$stamp = imagecreatefrompng('http://localhost/qr/web/images/stamp.png');
+			$im = imagecreatefrompng('http://localhost/qr/web/images/'.$outputHash.'.png');
+
+			// Установка полей для штампа и получение высоты/ширины штампа
+			$marge_right = 0;
+			$marge_bottom = 0;
+			$sx = imagesx($stamp);
+			$sy = imagesy($stamp);
+			imagealphablending($stamp, true);
+			imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+			// Вывод и освобождение памяти
+			imagepng($im, "C:\op\OpenServer\domains\localhost\qr/web/images/".$outputHash.".png");
+			imagedestroy($im);
 			
 			if($code != 'Aziz'){
 				

@@ -61,11 +61,13 @@ class loginController extends Controller
 					$pathToQr = '/qr/web/images/'.$outputHash.'.png';
 					$get = '?username='.$username;
 					$path = $this->get('kernel')->getRootDir() . '/../web/app_dev.php/gen';
+					$mail='';
 				return $this->render('default/qr.html.twig', array(
 				'pathToQr' => $pathToQr,
 				'outputHash' => $outputHash,
 				'authmes' => $authmes,
 				'username' => $username,
+				'mail' => $mail,
 				));
 				}
 				else{
@@ -134,11 +136,13 @@ class loginController extends Controller
 			$outputHash = $session->get('outputHash');
 			$get = '?username='.$username;
 			$path = $this->get('kernel')->getRootDir() . '/../web/app_dev.php/gen';
+			$mail='';
 			return $this->render('default/qr.html.twig', array(
 					'pathToQr' => $pathToQr,
 					'outputHash' => $outputHash,
 					'authmes' => $authmes,
 					'username' => $username,
+					'mail' => $mail,
 					));
 		}
 	

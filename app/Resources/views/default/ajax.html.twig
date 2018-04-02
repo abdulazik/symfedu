@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+<title>Ajax query</title>
+
+</head>
+<body>
+ <button class="ajax">click me!</button>
+    <div id="ajax-results">here comes the result</div>
+    <script>
+        $(document).on('click', 'button.ajax', function(){
+            that = $(this);
+            $.ajax({
+                url:'{{ (path('ajax_bundle_route')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "some_var_name": "some_var_value"
+                },
+                async: true,
+                success: function (data)
+                {
+                    console.log(data)
+                    $('div#ajax-results').html(data.output);
+
+                }
+            });
+            return false;
+
+        });
+    </script>
+</body>
